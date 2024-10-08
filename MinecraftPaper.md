@@ -55,3 +55,8 @@ services:
       - "/Docker/Minecraft/mcserver:/data"
     working_dir: "/data"
 ```
+## Conectar a la terminal
+
+```
+docker exec -it mcserver /bin/bash 
+```
