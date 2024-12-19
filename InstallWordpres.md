@@ -53,7 +53,11 @@ FLUSH PRIVILEGES;
 
 EXIT;
 ```
+### Dar privilegios en todas las bases de datos del server
+```SQL
+  GRANT ALL PRIVILEGES ON *.* TO 'umbreon'@'0.0.0.0';
 
+```
 # 5. Configuramos el servidor web para que apunte a la carpeta wordpress
 ```bash
 cd /etc/apache2/sites-available
