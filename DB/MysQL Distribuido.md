@@ -6,7 +6,12 @@ GRANT REPLICATION SLAVE ON *.* TO 'replicator'@'%';
 FLUSH PRIVILEGES;
 SHOW MASTER STATUS; ## para saber si el master está OK
 ```
+Edit config file /etc/mysql/my.cnf y agregar estas lineas
 
+```
+server-id = 1             # Unique server ID (use 1 for the master)
+log_bin = /var/lib/mysql/mysql-bin
+```
 
 ## Mysql Server Semilla
 
@@ -19,7 +24,12 @@ CHANGE MASTER TO
 START SLAVE;
 
 SHOW SLAVE STATUS\G;
+```
+Edit config file /etc/mysql/my.cnf y agregar estas lineas
 
+```
+server-id = 2             # Unique server ID (use 2 for the slave)
+log_bin = /var/lib/mysql/mysql-bin
 ```
 
 ## Mysql Server Main
