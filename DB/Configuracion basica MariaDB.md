@@ -38,3 +38,22 @@ EXIT;
   GRANT ALL PRIVILEGES ON *.* TO 'usuario'@'192.168.0.%';
 ```
 
+
+## Permitir accesos desde fuera del localhost
+
+Edita la configuracion del mysql para permitir accesos desde fuera del mysql.
+El fichero a modificar es el /etc/mysql/mariadb.cnf
+
+```SQL
+[mysqld]
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+datadir         = /var/lib/mysql
+log-error       = /var/log/mysql/error.log
+bind-address    = 0.0.0.0
+port            = 3306
+
+server-id = 2             # Unique server ID (use 2 for the slave)
+log_bin = /var/lib/mysql/mysql-bin
+```
+
