@@ -28,6 +28,16 @@ SHOW SLAVE STATUS\G;
 Edit config file /etc/mysql/my.cnf y agregar estas lineas
 
 ```
+[mysqld]
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+datadir         = /var/lib/mysql
+log-error       = /var/log/mysql/error.log
+bind-address    = 0.0.0.0
+port            = 3306
+
+server-id = 2             # Unique server ID (use 2 for the slave)
+log_bin = /var/lib/mysql/mysql-bin
 server-id = 2             # Unique server ID (use 2 for the slave)
 log_bin = /var/lib/mysql/mysql-bin
 ```
