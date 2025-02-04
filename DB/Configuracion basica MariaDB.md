@@ -29,8 +29,12 @@ FLUSH PRIVILEGES;
 EXIT;
 ```
 
-## Dar privilegios en todas las bases de datos del server
+## Dar privilegios en todas las bases de datos del server en todas las direcciones
 ```SQL
-  GRANT ALL PRIVILEGES ON *.* TO 'umbreon'@'0.0.0.0';
+  GRANT ALL PRIVILEGES ON *.* TO 'usuario'@'0.0.0.0';
+```
+## Dar privilegios en todas las bases de datos del server en un segmento de red
+```SQL
+  GRANT ALL PRIVILEGES ON *.* TO 'usuario'@'192.168.0.%';
 ```
 
