@@ -19,7 +19,7 @@ On the end of the file. Add and modify to your server.
 [global]
 workgroup = WORKGROUP
 server string = Samba Server %v
-netbios name = linuxserver # Where its supose to be your servers hostname
+netbios name = linuxserver # Where its suposed to be your server hostname
 security = user
 map to guest = bad user
 dns proxy = no
@@ -33,7 +33,7 @@ sudo systemctl enable smbd
 sudo ufw allow Samba
 ```
 
-Then modify rhe /etc/hosts
+Then modify the /etc/hosts
 
 ```shell
 sudo nano /etc/hosts
