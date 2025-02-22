@@ -76,20 +76,26 @@ Para que el driver de nvidia pueda apagar y encender el core tendremos que sobre
 echo auto > /sys/bus/pci/devices/0000\:01\:00.0/power/control
 ```
 ## Parametros útiles Modulo Nvidia
+Estas son las reglas del driver de nvidia que emnpleo
 Opciones a modificar / añadir en el fichero /etc/modprobe.d/nvidia-options.conf
 ```
 options nvidia-drm modeset=1
-options nvidia fbdev=1
-options nvidia NVreg_PreserveVideoMemoryAllocations=1
-options nvidia NVreg_EnableGpuFirmware=0
-options nvidia "NVreg_DynamicPowerManagement=0x02"
-options nvidia NVreg_EnableS0ixPowerManagement=1
-options nvidia NVreg_DynamicPowerManagementVideoMemoryThreshold 200
+options nvidia-current fbdev=1
+options nvidia-current NVreg_PreserveVideoMemoryAllocations=1 #Permite mantener en memoria la vram en la ram del equipo
+options nvidia-current NVreg_EnableGpuFirmware=0 #Desactiva GSP
+options nvidia-current "NVreg_DynamicPowerManagement=0x02" #Modos de energia afecta al D3
+options nvidia-current NVreg_EnableS0ixPowerManagement=1 #Gestion de energia de las memorias
+options nvidia-current NVreg_DynamicPowerManagementVideoMemoryThreshold 200  #El treshold de vram a partir del cual apagar o no la vram
 ```
-DynamicPowerManagement elige el modo de perfil de energia. 1 A todo meter nunca se apaga y sera mas agresivo.
+DynamicPowerManagement elige el modo de perfil de energia. 
+1 A todo meter nunca se apaga y sera mas agresivo.
 2 Fine grade en Turing y Ampere. Permite a la tarjeta entrar en modo reposo apagandose por llamadas ACPI si el CPU, placa base y GPU lo soportan. D3Cold
 3 Default en Turing y Ampere. En Ada Love Lace es Fine grade
 
+### Con el sigiente comando comprobamos los parametros cargados
+```
+sudo cat /proc/driver/nvidia/params 
+```
 ## Rehacer reglas Udev
 
 Reglas udev fundamentales para apagar  https://wiki.archlinux.org/title/Hybrid_graphics
@@ -129,7 +135,7 @@ TEST!="/run/udev/gdm-machine-has-vendor-nvidia-driver", GOTO="gdm_hybrid_nvidia_
 #GOTO="gdm_disable_wayland"
 LABEL="gdm_hybrid_nvidia_laptop_check_end"
 ```
-También necesitaremos activar en el modulo de nvidia este parámetro. Como hicimos antes agregando el parámetro si no lo esta. 
+### También necesitaremos activar en el modulo de nvidia este parámetro. Como hicimos antes agregando el parámetro si no lo esta. 
 ```shell
 options nvidia NVreg_PreserveVideoMemoryAllocations=1
 ```
