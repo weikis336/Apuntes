@@ -1,0 +1,18 @@
+##Don't forget to use the command docker network create frontend befor to build the container
+networks:
+  frontend:
+   external: true
+
+services:
+  npm-app:
+    image: jc21/nginx-proxy-manager:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "127.0.0.1:81:81" ## Opens the port but only trhought the localhost 
+      - "443:443"
+    volumes:
+      - ./npm-data:/data
+      - ./npm-ssl:/etc/letsencrypt
+    networks:
+      - frontend
